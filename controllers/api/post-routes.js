@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-  // update a Tag by its id value
+  // update a Post by its id value
 router.put('/:id', async (req, res) => {
     try{
       const insert = await Post.update(
@@ -83,3 +83,5 @@ router.put('/:id', async (req, res) => {
       res.status(500).json(err);
     }
   });
+
+  module.exports = router;

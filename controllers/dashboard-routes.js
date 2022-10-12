@@ -1,16 +1,16 @@
-const router = require('express').Router();
-const { User, Post, Comment } = require('../models');
+const router = require("express").Router();
+const {Post} = require("../models");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const allPosts = await Post.findAll({ include: [User] });
-
-        const posts = allPosts.map(post => {
-            post.get({ plain: true });
+        const posts = await Post.findAll({
+            // where: {
+            //     userId: req.session.userId
+            // }
         });
-        res.render('all-posts', { posts });
-
-    } catch (err) {
+        const allPosts = posts.map((post) => post.get({plain: true}));
+        res.render("all-posts-admin", {layout: "dashboard", allPosts});
+    } catch(err) {
         res.status(400).json(err);
     }
 });

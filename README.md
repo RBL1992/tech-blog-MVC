@@ -40,6 +40,7 @@ Devan Parkison
 
 Jackson Myhre
 
+Instructional staff supplied models and handlebars files
 
 ## Testing
 N/A

@@ -17,6 +17,25 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/post/:id', async (req, res) => {
+    try {
+        const aPost = await Post.findByPk(req.params.id, {
+            include: [User,
+                {
+                    model: Comment,
+                    include: [User],
+                },
+            ],
+        });
+        if(aPost) {
+            const post = aPost.get({plain: true});
+            res.render('single-post', {post});
+        }
+    } catch(err) {
+        res.status(500).json(err);
+    }
+});
+
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {

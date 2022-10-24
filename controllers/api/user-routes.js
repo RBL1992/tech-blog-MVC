@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
+const { User } = require('../../models');
 
 // Get all users
 router.get('/', async (req, res) => {
@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
   
       req.session.save(() => {
         req.session.userId = newUser.id;
+        req.session.userName = newUser.username
         req.session.loggedIn = true;
   
         res.status(200).json(newUser);

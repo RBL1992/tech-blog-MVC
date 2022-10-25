@@ -38,6 +38,7 @@ router.post('/login', async (req, res) => {
       const user = await User.findOne({
         where: {
           username: req.body.username,
+          password: req.body.password
         },
       });
   
@@ -58,8 +59,8 @@ router.post('/login', async (req, res) => {
       }
   
       req.session.save(() => {
-        req.session.userId = newUser.id;
-        req.session.userName = newUser.username
+        req.session.userId = user.id;
+        req.session.userName = user.username
         req.session.loggedIn = true;
   
         res
